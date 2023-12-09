@@ -1,0 +1,23 @@
+{
+  "name": "understanding-typescript",
+  "version": "1.0.0",
+  "description": "Understanding Typescript",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robin544/learn-typescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robin544/learn-typescript/issues"
+  },
+  "homepage": "https://github.com/Robin544/learn-typescript#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
