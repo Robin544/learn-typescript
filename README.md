@@ -1,7 +1,9 @@
 # Understanding Typescript
 ### Understanding TypeScript and its Features like Types, ES6 Support, Classes, Modules, Interfaces and much more in any of the Projects.
 
-[Note]: This setup is for windows only and can be differ for other OS.
+> [!NOTE]
+> This setup is for windows only and can be differ for other OS.
+
 ### Steps to follow to run the project:
 - npm install
 - npx tsc app.ts
