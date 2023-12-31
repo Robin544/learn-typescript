@@ -6,7 +6,7 @@
 
 ### Steps to follow to run the project:
 - npm install
-- npx tsc app.ts (-w for watch mode)
+- npx tsc (-w for watch mode)
 - npm start (in separate terminal)
 
 #### To run the project in watch mode and compile the entire project/multiiple files, follow these steps:
