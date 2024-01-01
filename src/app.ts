@@ -1,4 +1,4 @@
-// ProjectState class
+// Project State Management class
 class ProjectState {
     private listeners: any[] = [];
     private projects: any[] = [];
