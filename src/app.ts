@@ -5,7 +5,7 @@ class Project {
     constructor(
         public id: string,
         public title: string,
-        public decription: string,
+        public description: string,
         public people: number,
         public status: ProjectStatus
     ) { }
@@ -119,12 +119,36 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement>{
     abstract renderContent(): void;
 }
 
+// ProjectItem class
+class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
+    private project: Project;
+
+    constructor(hostId: string, project: Project) {
+        super('single-project', hostId, true, project.id);
+        this.project = project;
+
+        this.configure();
+        this.renderContent();
+    }
+
+    configure(): void { }
+
+    renderContent(): void {
+        const { title, description, people } = this.project;
+        this.element.querySelector('h2')!.textContent = title;
+        this.element.querySelector('h3')!.textContent = people.toString();
+        this.element.querySelector('p')!.textContent = description;
+    }
+
+}
+
 // ProjectList class
 class ProjectList extends Component<HTMLDivElement, HTMLElement> {
     assignedProjects: Project[] = [];
 
     constructor(private type: 'active' | 'finished') {
         super('project-list', 'app', false, `${type}-projects`);
+
         this.configure();
         this.renderContent();
     }
@@ -152,9 +176,7 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
         const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
         listEl.innerHTML = '';
         for (const projectItem of this.assignedProjects) {
-            const listItem = document.createElement('li');
-            listItem.textContent = projectItem.title;
-            listEl.appendChild(listItem);
+            new ProjectItem(this.element.querySelector('ul')!.id, projectItem);
         }
     }
 }
@@ -189,7 +211,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
 
     private gatherUserInputs(): [string, string, number] | void {
         const title = this.titleInputElement.value;
-        const decription = this.decriptionInputElement.value;
+        const description = this.decriptionInputElement.value;
         const people = this.peopleInputElement.value;
 
         const titleValidable: Validatable = {
@@ -198,7 +220,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
         }
 
         const descriptionValidable: Validatable = {
-            value: decription,
+            value: description,
             required: true,
             minLength: 5
         }
@@ -214,7 +236,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
             alert('Invalid input, please try again!');
             return;
         } else {
-            return [title, decription, +people];
+            return [title, description, +people];
         }
     }
 
@@ -223,8 +245,8 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
         event.preventDefault();
         const userInput = this.gatherUserInputs();
         if (Array.isArray(userInput)) {
-            const [title, decription, people] = userInput;
-            projectState.addProject(title, decription, people);
+            const [title, description, people] = userInput;
+            projectState.addProject(title, description, people);
             this.clearInputs();
         }
     }
