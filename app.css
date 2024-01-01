@@ -65,6 +65,8 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #FFFFFF;
+  font-weight: 600;
 }
 
 #finished-projects {

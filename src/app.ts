@@ -43,6 +43,34 @@ function autoBind(_target: any, _methodName: string, descriptor: PropertyDescrip
     return adjDescriptor;
 }
 
+// ProjectList class
+class ProjectList {
+    templateElement: HTMLTemplateElement;
+    hostElement: HTMLDivElement;
+    sectionElement: HTMLElement;
+
+    constructor(private type: 'active' | 'finished') {
+        this.templateElement = document.getElementById('project-list')! as HTMLTemplateElement;
+        this.hostElement = document.getElementById('app')! as HTMLDivElement;
+
+        const importedNode = document.importNode(this.templateElement.content, true);
+        this.sectionElement = importedNode.firstElementChild as HTMLFormElement;
+        this.sectionElement.id = `${this.type}-projects`;
+
+        this.attach();
+        this.renderContent();
+    }
+
+    private attach() {
+        this.hostElement.insertAdjacentElement('beforeend', this.sectionElement);
+    }
+
+    private renderContent() {
+        const listId = `${this.type}-projects-list`;
+        this.sectionElement.querySelector('ul')!.id = listId;
+        this.sectionElement.querySelector('header')!.textContent = this.type.toUpperCase() + ' PROJECTS';
+    }
+}
 
 // ProjectInput class definition
 class ProjectInput {
@@ -127,3 +155,5 @@ class ProjectInput {
 }
 
 const pi = new ProjectInput();
+const activePl = new ProjectList('active');
+const finishedPl = new ProjectList('finished');
