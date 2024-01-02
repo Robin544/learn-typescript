@@ -119,8 +119,21 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement>{
     abstract renderContent(): void;
 }
 
+// Draggable interface
+interface Draggable {
+    dragStartHandler(event: DragEvent): void;
+    dragEndHandler(event: DragEvent): void;
+}
+
+// Drop Target interface
+interface DropTarget {
+    dragOverHandler(event: DragEvent): void;
+    dropHandler(event: DragEvent): void;
+    dragLeaveHandler(event: DragEvent): void;
+}
+
 // ProjectItem class
-class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
+class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> implements Draggable {
     private project: Project;
 
     get persons() {
@@ -136,7 +149,19 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
         this.renderContent();
     }
 
-    configure(): void { }
+    @autoBind
+    dragStartHandler(event: DragEvent): void {
+        console.info(event)
+    }
+
+    dragEndHandler(_: DragEvent): void {
+        console.info("Drag End!");
+    }
+
+    configure(): void {
+        this.element.addEventListener("dragstart", this.dragStartHandler);
+        this.element.addEventListener("dragend", this.dragEndHandler);
+    }
 
     renderContent(): void {
         const { title, description, people } = this.project;
