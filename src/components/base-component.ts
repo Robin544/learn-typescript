@@ -1,5 +1,5 @@
 // Component Base class; abstract keyword forces not to instantiate the class directly but extends this Component class.
-export abstract class Component<T extends HTMLElement, U extends HTMLElement>{
+export default abstract class Component<T extends HTMLElement, U extends HTMLElement>{
     templateElement: HTMLTemplateElement;
     hostElement: T;
     element: U;
