@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     entry: './src/app.ts',
     output: {
-        filename: 'bundle.js', // bundle[contentHash].js to create a uniquehash for eery build.
+        filename: 'bundle.js', // bundle[contentHash].js to create a unique hash for every build.
         path: path.resolve(__dirname, 'dist')
     },
     devtool: 'inline-source-map',
