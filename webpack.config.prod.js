@@ -15,13 +15,12 @@ module.exports = {
         filename: 'bundle.js', // bundle[contentHash].js to create a unique hash for every build.
         path: path.resolve(__dirname, 'dist')
     },
-    devtool: 'none',
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
-                exclude: '/node_modules/'
+                exclude: /node_modules/
             }
         ]
     },
