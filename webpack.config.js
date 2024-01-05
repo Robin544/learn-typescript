@@ -6,4 +6,17 @@ module.exports = {
         filename: 'bundle.js', // bundle[contentHash].js to create a uniquehash for eery build.
         path: path.resolve(__dirname, 'dist')
     },
+    devtool: 'inline-source-map',
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: '/node_modules'
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js']
+    }
 }
